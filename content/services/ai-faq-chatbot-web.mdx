@@ -1,0 +1,33 @@
+---
+slug: ai-faq-chatbot-web
+title: AI FAQ Chatbot Web
+shortName: AI Support Triage
+eyebrow: AI FAQ Chatbot Web
+summary: Web chat with RAG over your knowledge base. First response time under 10 minutes. Human handoff with full conversation context preserved.
+icon: Headphones
+bullets:
+  - RAG agent over your docs, help center and policies
+  - First-response time under 10 minutes (vs typical 24h)
+  - Human handoff with full conversation context
+  - Exceptions queue with daily review workflow
+  - Source citation on every answer (auditability)
+  - Weekly accuracy and deflection report
+deliverables:
+  - Knowledge base ingestion pipeline (Supabase pgvector)
+  - Chat widget with brand styling
+  - Operator inbox with handoff button
+  - Exception review dashboard
+  - Source citation UI
+  - Weekly accuracy and deflection KPI report
+timelineDays: "21"
+startingPriceUsd: 1550
+productSku: AGL-FAQ-WEB
+vertical: b2b-saas
+order: 3
+featured: true
+faqs:
+  - q: How do you prevent hallucinations?
+    a: Every answer cites the source document and snippet used. The agent refuses to answer when retrieval confidence is below threshold, routing the conversation to the exception queue for human review. We measure factual accuracy weekly on a sampled 50-conversation audit and report drift.
+---
+
+Placeholder body — full service narrative ships in Phase 3.
