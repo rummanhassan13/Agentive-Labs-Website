@@ -1,26 +1,150 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ---------------------------------------------------------------------------
+   Brand tokens — OKLCH only. Light mode default; dark overrides under .dark.
+   shadcn-style aliases (--background, --foreground, --primary, …) map to
+   these brand tokens inside @theme inline so shadcn primitives render in the
+   brand palette without restyling.
+   --------------------------------------------------------------------------- */
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --surface-0: oklch(0.99 0.003 240);
+  --surface-1: oklch(0.97 0.004 240);
+  --surface-2: oklch(0.94 0.005 240);
+  --surface-3: oklch(0.91 0.006 240);
+
+  --text-primary: oklch(0.18 0.01 240);
+  --text-secondary: oklch(0.42 0.01 240);
+  --text-tertiary: oklch(0.58 0.01 240);
+
+  --border-subtle: oklch(0.18 0.01 240 / 0.10);
+  --border-emphasis: oklch(0.18 0.01 240 / 0.18);
+
+  --accent: oklch(0.78 0.14 195);
+  --accent-fg: oklch(0.15 0.02 240);
+  --accent-muted: oklch(0.78 0.14 195 / 0.12);
+
+  --success: oklch(0.74 0.15 145);
+  --warning: oklch(0.82 0.14 80);
+  --danger: oklch(0.62 0.21 25);
+
+  --ring: oklch(0.78 0.14 195 / 0.55);
+
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.25rem;
+}
+
+.dark {
+  --surface-0: oklch(0.16 0.012 240);
+  --surface-1: oklch(0.20 0.013 240);
+  --surface-2: oklch(0.24 0.014 240);
+  --surface-3: oklch(0.28 0.015 240);
+
+  --text-primary: oklch(0.97 0.005 240);
+  --text-secondary: oklch(0.80 0.008 240);
+  --text-tertiary: oklch(0.62 0.010 240);
+
+  --border-subtle: oklch(1 0 0 / 0.08);
+  --border-emphasis: oklch(1 0 0 / 0.14);
+
+  --accent: oklch(0.78 0.14 195);
+  --accent-fg: oklch(0.12 0.02 240);
+  --accent-muted: oklch(0.78 0.14 195 / 0.18);
+
+  --ring: oklch(0.78 0.14 195 / 0.65);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  /* Brand color utilities */
+  --color-surface-0: var(--surface-0);
+  --color-surface-1: var(--surface-1);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-fg: var(--text-primary);
+  --color-fg-muted: var(--text-secondary);
+  --color-fg-subtle: var(--text-tertiary);
+  --color-border-subtle: var(--border-subtle);
+  --color-border-emphasis: var(--border-emphasis);
+  --color-accent: var(--accent);
+  --color-accent-fg: var(--accent-fg);
+  --color-accent-muted: var(--accent-muted);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+
+  /* shadcn-style aliases mapped onto brand tokens */
+  --color-background: var(--surface-0);
+  --color-foreground: var(--text-primary);
+  --color-card: var(--surface-1);
+  --color-card-foreground: var(--text-primary);
+  --color-popover: var(--surface-1);
+  --color-popover-foreground: var(--text-primary);
+  --color-primary: var(--accent);
+  --color-primary-foreground: var(--accent-fg);
+  --color-secondary: var(--surface-2);
+  --color-secondary-foreground: var(--text-primary);
+  --color-muted: var(--surface-2);
+  --color-muted-foreground: var(--text-secondary);
+  --color-destructive: var(--danger);
+  --color-destructive-foreground: oklch(0.99 0 0);
+  --color-border: var(--border-subtle);
+  --color-input: var(--border-emphasis);
+  --color-ring: var(--ring);
+
+  /* Fonts (variables injected by next/font on <html>) */
+  --font-serif: var(--font-instrument-serif);
+  --font-sans: var(--font-inter);
   --font-mono: var(--font-geist-mono);
+
+  /* Radii */
+  --radius: var(--radius-lg);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  *,
+  *::before,
+  *::after {
+    border-color: var(--border-subtle);
   }
-}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background-color: var(--surface-0);
+    color: var(--text-primary);
+    font-family: var(--font-sans), ui-sans-serif, system-ui, -apple-system,
+      "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-feature-settings: "cv11", "ss01", "ss03";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background-color: var(--accent-muted);
+    color: var(--text-primary);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
 }
