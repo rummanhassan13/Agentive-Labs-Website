@@ -12,14 +12,17 @@ const sizeClass: Record<ContainerSize, string> = {
 export function Container({
   size = "default",
   className,
+  id,
   children,
 }: {
   size?: ContainerSize;
   className?: string;
+  id?: string;
   children: React.ReactNode;
 }) {
   return (
     <div
+      id={id}
       className={cn(
         "mx-auto w-full px-5 sm:px-6 lg:px-8",
         sizeClass[size],
