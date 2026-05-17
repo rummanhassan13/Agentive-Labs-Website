@@ -4,6 +4,7 @@ import { ThemeProvider } from "@/components/utility/ThemeProvider";
 import { JsonLd } from "@/components/utility/JsonLd";
 import { organization, website } from "@/lib/jsonld/organization";
 import { Toaster } from "@/components/ui/sonner";
+import { AnalyticsProviders } from "@/components/analytics/AnalyticsProviders";
 import { site } from "@/lib/site";
 import "./globals.css";
 
@@ -45,8 +46,10 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
-          <Toaster />
+          <AnalyticsProviders>
+            {children}
+            <Toaster />
+          </AnalyticsProviders>
         </ThemeProvider>
         <JsonLd data={[organization(), website()]} />
       </body>

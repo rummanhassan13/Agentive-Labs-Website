@@ -8,30 +8,29 @@ import { Button } from "@/components/ui/button";
 
 export function ThemeToggle() {
   const { resolvedTheme, setTheme } = useTheme();
-  const [mounted, setMounted] = React.useState(false);
-
-  React.useEffect(() => setMounted(true), []);
-
-  const isDark = mounted && resolvedTheme === "dark";
+  // resolvedTheme is undefined on first render (next-themes resolves it after
+  // hydration) — use that as our hydration gate instead of a separate mounted
+  // boolean.
+  const ready = resolvedTheme !== undefined;
+  const isDark = ready && resolvedTheme === "dark";
 
   return (
     <Button
       variant="ghost"
       size="icon"
       aria-label={
-        mounted ? `Switch to ${isDark ? "light" : "dark"} mode` : "Toggle theme"
+        ready ? `Switch to ${isDark ? "light" : "dark"} mode` : "Toggle theme"
       }
-      onClick={() => setTheme(isDark ? "light" : "dark")}
+      onClick={() => ready && setTheme(isDark ? "light" : "dark")}
     >
-      {mounted ? (
+      {ready ? (
         isDark ? (
-          <Sun className="h-5 w-5" />
+          <Sun className="h-5 w-5" aria-hidden />
         ) : (
-          <Moon className="h-5 w-5" />
+          <Moon className="h-5 w-5" aria-hidden />
         )
       ) : (
-        // Render a stable placeholder for SSR to avoid hydration mismatch
-        <span className="h-5 w-5" />
+        <span className="block h-5 w-5" aria-hidden />
       )}
     </Button>
   );
