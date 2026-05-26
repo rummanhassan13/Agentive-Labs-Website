@@ -54,6 +54,81 @@ const services = defineCollection({
     .transform((d) => ({ ...d, url: `/services/${d.slug}` })),
 });
 
+const portfolio = defineCollection({
+  name: "PortfolioItem",
+  pattern: "portfolio/**/*.mdx",
+  schema: s
+    .object({
+      slug: s.slug("portfolio"),
+      title: s.string(),
+      client: s.string(),
+      industry: s.string(),
+      summary: s.string(),
+      results: s.object({
+        value: s.string(),
+        label: s.string(),
+      }),
+      servicesRelated: s.array(s.string()),
+      deliverables: s.array(s.string()),
+      techStack: s.array(s.string()),
+      timelineDays: s.string(),
+      featured: s.boolean().default(false),
+      order: s.number().default(99),
+      seo: seo.optional(),
+      metadata: s.metadata(),
+      body: s.mdx(),
+    })
+    .transform((d) => ({ ...d, url: `/portfolio/${d.slug}` })),
+});
+
+const blog = defineCollection({
+  name: "BlogPost",
+  pattern: "blog/**/*.mdx",
+  schema: s
+    .object({
+      slug: s.slug("blog"),
+      title: s.string(),
+      excerpt: s.string(),
+      date: s.isodate(),
+      author: s.object({
+        name: s.string(),
+        role: s.string(),
+        avatar: s.string().optional(),
+      }),
+      tags: s.array(s.string()).default([]),
+      readTime: s.string(),
+      featured: s.boolean().default(false),
+      seo: seo.optional(),
+      metadata: s.metadata(),
+      body: s.mdx(),
+    })
+    .transform((d) => ({ ...d, url: `/blog/${d.slug}` })),
+});
+
+const team = defineCollection({
+  name: "TeamMember",
+  pattern: "team/**/*.mdx",
+  schema: s
+    .object({
+      slug: s.slug("team"),
+      name: s.string(),
+      role: s.string(),
+      bio: s.string(),
+      expertise: s.array(s.string()).default([]),
+      socialLinks: s
+        .object({
+          linkedin: s.string().optional(),
+          github: s.string().optional(),
+          twitter: s.string().optional(),
+        })
+        .optional(),
+      order: s.number().default(99),
+      metadata: s.metadata(),
+      body: s.mdx(),
+    })
+    .transform((d) => ({ ...d, url: `/team/${d.slug}` })),
+});
+
 export default defineConfig({
   root: "content",
   output: {
@@ -62,5 +137,5 @@ export default defineConfig({
     base: "/static/",
     clean: true,
   },
-  collections: { services },
+  collections: { services, portfolio, blog, team },
 });

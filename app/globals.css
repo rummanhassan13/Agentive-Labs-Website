@@ -171,3 +171,36 @@
     }
   }
 }
+
+/* Premium Web Layout Utilities (Tailwind v4) */
+@utility bg-grid-pattern {
+  background-size: 48px 48px;
+  background-image: 
+    linear-gradient(to right, var(--border-subtle) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--border-subtle) 1px, transparent 1px);
+}
+
+@utility bg-radial-glow {
+  background: radial-gradient(circle 800px at 50% 200px, var(--accent-muted), transparent 80%);
+}
+
+@utility bg-radial-glow-sm {
+  background: radial-gradient(circle 400px at 50% 50%, var(--accent-muted), transparent 80%);
+}
+
+@utility card-glass {
+  background: oklch(from var(--surface-1) l c h / 0.7);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--border-subtle);
+}
+
+@utility card-glass-hover {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+
+  &:hover {
+    background: oklch(from var(--surface-1) l c h / 0.85);
+    border-color: var(--border-emphasis);
+    box-shadow: 0 12px 40px -12px oklch(from var(--accent) l c h / 0.08);
+  }
+}
+

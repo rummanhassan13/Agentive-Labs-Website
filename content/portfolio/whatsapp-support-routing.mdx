@@ -1,0 +1,46 @@
+---
+slug: whatsapp-support-routing
+title: Intelligent WhatsApp Support Triage & CRM Routing
+client: "Apex Logistics Ltd"
+industry: Logistics & Supply Chain
+summary: We designed an AI-powered WhatsApp customer support routing agent utilizing the WhatsApp Cloud API, pgvector, and HubSpot. It achieved a 40% FAQ deflection rate and cut response times down from 2 hours to under 10 minutes.
+results:
+  value: "<10 min"
+  label: Response Time Reduced
+servicesRelated:
+  - whatsapp-automation-starter
+  - ai-faq-chatbot-web
+deliverables:
+  - WhatsApp Cloud API Webhook Integration
+  - Semantic Search FAQ Retrieval (Supabase pgvector)
+  - HubSpot Ticket Autocopy and Assignment Engine
+  - Human Escalation Protocol and Queue Dashboard
+techStack:
+  - n8n
+  - WhatsApp Cloud API
+  - Supabase (pgvector)
+  - HubSpot CRM
+  - OpenAI GPT-4o
+timelineDays: "28"
+featured: true
+order: 2
+---
+
+## The Challenge
+
+Apex Logistics, a regional logistics provider, received over 1,500 WhatsApp messages daily from customers asking about package statuses, shipping rates, and delivery delays. Because messages were landing in a generic shared inbox, team members spent hours manually sorting and responding. The average response time exceeded 2 hours, violating SLAs and frustrating key corporate accounts.
+
+## The Solution
+
+We built an intelligent, context-aware triage assistant:
+1. **Interactive Greeting & Triage:** Incoming WhatsApp messages are parsed in real-time. A fast classifier determines the user intent (Tracking, Scoping/Quote, Support).
+2. **AI Semantic Search:** For common FAQs (e.g., "What are your delivery regions?"), the n8n flow runs a vector similarity search in Supabase using `pgvector` to fetch the exact policy, drafting an instantaneous, human-vetted reply.
+3. **CRM Routing:** For complex service queries, a new HubSpot ticket is created immediately, populated with the full conversation transcript, and assigned to the matching regional operations manager.
+4. **Instant Escalation:** If the user displays high frustration, the system bypasses AI and instantly alerts an on-duty human operator on Slack, pulling up a live chat interface.
+
+## The ROI & Results
+
+Within the first 60 days of launching the agent:
+* **First Response:** Average first-response time dropped to under 10 seconds for FAQs, and under 8 minutes for human handoffs.
+* **Support Deflection:** 40% of standard tracking and FAQ inquiries are completely handled by the assistant.
+* **Revenue Preservation:** Saved 3 accounts that were on the verge of churn due to poor communication speeds.
