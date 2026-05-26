@@ -32,10 +32,10 @@ export function Header() {
       <header
         role="banner"
         className={cn(
-          "sticky top-0 z-50 w-full border-b border-border-subtle backdrop-blur-md transition-[height,background-color] duration-200",
+          "sticky top-0 z-50 w-full border-b backdrop-blur-xl transition-[height,background-color,border-color] duration-300",
           scrolled
-            ? "h-14 bg-surface-0/85"
-            : "h-[72px] bg-surface-0/70"
+            ? "h-14 bg-surface-0/80 border-border-subtle"
+            : "h-[72px] bg-surface-0/40 border-border-subtle/40"
         )}
       >
         <Container className="flex h-full items-center justify-between gap-4">

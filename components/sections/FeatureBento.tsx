@@ -1,3 +1,5 @@
+"use client";
+
 import type { LucideIcon } from "lucide-react";
 import {
   Workflow,
@@ -12,6 +14,9 @@ import {
 
 import { Container } from "@/components/layout/Container";
 import { BentoCard } from "@/components/cards/BentoCard";
+import { motion } from "motion/react";
+import { useReducedMotion } from "@/components/utility/MotionSafe";
+import { staggerContainer, fadeUp } from "@/lib/motion";
 
 export interface FeatureItem {
   title: string;
@@ -54,6 +59,8 @@ export function FeatureBento({
   intro,
   items,
 }: FeatureBentoProps) {
+  const reduced = useReducedMotion();
+
   return (
     <Container>
       <div className="max-w-2xl">
@@ -69,12 +76,19 @@ export function FeatureBento({
           </p>
         )}
       </div>
-      <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-12">
+      <motion.div
+        variants={!reduced ? staggerContainer : undefined}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-12"
+      >
         {items.map((item) => {
           const Icon = item.iconName ? iconMap[item.iconName] : undefined;
           return (
-            <div
+            <motion.div
               key={item.title}
+              variants={!reduced ? fadeUp : undefined}
               className={spanClass[item.span ?? 4] ?? "lg:col-span-4"}
             >
               <BentoCard
@@ -84,10 +98,11 @@ export function FeatureBento({
                 href={item.href}
                 Icon={Icon}
               />
-            </div>
+            </motion.div>
           );
         })}
-      </div>
+      </motion.div>
     </Container>
   );
 }
+
