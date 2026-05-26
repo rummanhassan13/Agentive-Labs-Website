@@ -36,9 +36,10 @@ interface ContactFormProps {
     email: string;
     notes: string;
   }) => void;
+  defaultWorkflow?: string;
 }
 
-export function ContactForm({ onSubmitted }: ContactFormProps) {
+export function ContactForm({ onSubmitted, defaultWorkflow = "" }: ContactFormProps) {
   const searchParams = useSearchParams();
   const presetPackage = searchParams.get("package") ?? "";
   const presetVertical = (searchParams.get("vertical") ?? "") as
@@ -63,7 +64,7 @@ export function ContactForm({ onSubmitted }: ContactFormProps) {
       email: "",
       company: "",
       vertical: (presetVertical || "other") as ContactInput["vertical"],
-      workflow: "",
+      workflow: defaultWorkflow,
       teamSize: "10-50",
       budget: "2-5k",
       siteUrl: "",

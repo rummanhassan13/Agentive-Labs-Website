@@ -1,7 +1,12 @@
+"use client";
+
 import * as React from "react";
 import Link from "next/link";
 import type { LucideIcon } from "lucide-react";
 import { ArrowUpRight } from "lucide-react";
+import { motion } from "motion/react";
+import { useReducedMotion } from "@/components/utility/MotionSafe";
+import { duration, easing } from "@/lib/motion";
 
 import { cn } from "@/lib/utils";
 
@@ -24,12 +29,21 @@ export function BentoCard({
   className,
   children,
 }: BentoCardProps) {
+  const reduced = useReducedMotion();
+  
+  const whileHover = !reduced && href ? { scale: 1.02, y: -4 } : undefined;
+  const transition = !reduced
+    ? { duration: duration.short, ease: easing.outExpo }
+    : undefined;
+
   const inner = (
-    <div
+    <motion.div
+      whileHover={whileHover}
+      transition={transition}
       className={cn(
         "group relative flex h-full flex-col gap-3 rounded-2xl border border-border-subtle bg-surface-1 p-6 transition-all duration-200",
         href &&
-          "hover:-translate-y-0.5 hover:border-border-emphasis hover:bg-surface-2",
+          "hover:border-border-emphasis hover:bg-surface-2",
         "[transition-timing-function:cubic-bezier(0.16,1,0.3,1)]",
         className
       )}
@@ -58,7 +72,7 @@ export function BentoCard({
           <ArrowUpRight className="h-4 w-4" aria-hidden />
         </div>
       )}
-    </div>
+    </motion.div>
   );
 
   if (href) {
@@ -74,3 +88,4 @@ export function BentoCard({
   }
   return inner;
 }
+

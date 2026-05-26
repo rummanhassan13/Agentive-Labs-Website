@@ -1,5 +1,10 @@
+"use client";
+
 import { Container } from "@/components/layout/Container";
 import { cn } from "@/lib/utils";
+import { motion } from "motion/react";
+import { useReducedMotion } from "@/components/utility/MotionSafe";
+import { staggerContainer, fadeUp } from "@/lib/motion";
 
 export interface Testimonial {
   quote: string;
@@ -41,17 +46,26 @@ export function TestimonialTrio({
   heading = "What clients say",
   items,
 }: TestimonialTrioProps) {
+  const reduced = useReducedMotion();
   const rendered = items?.length === 3 ? items : PLACEHOLDER;
   const isPlaceholder = rendered === PLACEHOLDER;
+
   return (
     <Container>
       <h2 className="font-serif text-3xl tracking-tight md:text-4xl">
         {heading}
       </h2>
-      <div className="mt-10 grid gap-6 md:grid-cols-3">
+      <motion.div
+        variants={!reduced ? staggerContainer : undefined}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        className="mt-10 grid gap-6 md:grid-cols-3"
+      >
         {rendered.map((t, i) => (
-          <figure
+          <motion.figure
             key={i}
+            variants={!reduced ? fadeUp : undefined}
             className={cn(
               "flex flex-col gap-4 rounded-2xl border border-border-subtle bg-surface-1 p-6",
               isPlaceholder && "opacity-70"
@@ -74,9 +88,9 @@ export function TestimonialTrio({
                 </div>
               </div>
             </figcaption>
-          </figure>
+          </motion.figure>
         ))}
-      </div>
+      </motion.div>
       {isPlaceholder && (
         <div className="mt-4 font-mono text-[11px] uppercase tracking-[0.08em] text-fg-subtle">
           Real testimonials pending — placeholder content only
@@ -85,3 +99,4 @@ export function TestimonialTrio({
     </Container>
   );
 }
+

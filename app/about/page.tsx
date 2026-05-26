@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { team } from "#site/content";
+import { User } from "lucide-react";
 
 import { SiteShell } from "@/components/layout/SiteShell";
 import { Section } from "@/components/layout/Section";
@@ -121,6 +123,67 @@ export default function AboutPage() {
               </li>
             ))}
           </ul>
+        </Container>
+      </Section>
+
+      {/* Dynamic Team Grid */}
+      <Section pad="lg">
+        <Container>
+          <div className="max-w-2xl mb-10">
+            <div className="font-mono text-[11px] uppercase tracking-[0.08em] text-fg-subtle">
+              The builders
+            </div>
+            <h2 className="mt-3 font-serif text-3xl tracking-tight md:text-4xl">
+              Meet the Systems Architects
+            </h2>
+            <p className="mt-3 text-base leading-relaxed text-fg-muted">
+              We are specialized integration engineers, data pipeline builders, and automation architects.
+            </p>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {team.slice().sort((a, b) => a.order - b.order).map((member) => (
+              <div 
+                key={member.slug} 
+                className="flex flex-col justify-between rounded-2xl border border-border-subtle bg-surface-1 p-6 card-glass card-glass-hover"
+              >
+                <div className="space-y-4">
+                  <div className="flex items-center gap-4">
+                    <div className="h-12 w-12 rounded-xl bg-accent-muted border border-accent/20 flex items-center justify-center text-accent">
+                      <User className="h-6 w-6" />
+                    </div>
+                    <div>
+                      <h3 className="font-serif text-xl font-bold text-fg leading-none">
+                        {member.name}
+                      </h3>
+                      <span className="text-xs font-mono text-fg-subtle mt-1 block">
+                        {member.role}
+                      </span>
+                    </div>
+                  </div>
+                  <p className="text-sm leading-relaxed text-fg-muted">
+                    {member.bio}
+                  </p>
+                </div>
+
+                <div className="border-t border-border-subtle pt-4 mt-6">
+                  <div className="font-mono text-[9px] uppercase tracking-wider text-fg-subtle mb-2">
+                    Core Expertise
+                  </div>
+                  <div className="flex flex-wrap gap-1">
+                    {member.expertise.map((exp) => (
+                      <span 
+                        key={exp} 
+                        className="font-mono text-[9px] bg-surface-3 px-1.5 py-0.5 rounded border border-border-subtle text-fg-muted"
+                      >
+                        {exp}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </Container>
       </Section>
 

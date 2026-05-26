@@ -1,0 +1,45 @@
+---
+slug: shopify-reconciliation
+title: Shopify Daily Order-to-Invoice Reconciliation Automation
+client: "[Redacted — Shopify D2C, USD 4M ARR]"
+industry: D2C E-commerce
+summary: We built a fully automated order-to-invoice reconciliation flow on n8n connecting Shopify, Stripe, and Xero, eliminating 6 hours per day of tedious manual spreadsheet verification and recovering $14,000 in mispriced refunds in month one.
+results:
+  value: "−60%"
+  label: Reconciliation Time Saved
+servicesRelated:
+  - ai-lead-gen-kit
+deliverables:
+  - Automated Shopify-Xero sync ledger
+  - Stripe transaction match mapping engine
+  - Daily error/reconciliation reporting dashboard
+  - Operations runbook & exception queue
+techStack:
+  - n8n
+  - Shopify API
+  - Stripe API
+  - Xero API
+  - Supabase
+timelineDays: "21"
+featured: true
+order: 1
+---
+
+## The Challenge
+
+Our client, a high-growth Shopify D2C brand operating at $4M ARR, was bogged down by a massive operational bottleneck. Every day, the finance team spent 5 to 6 hours manually cross-referencing Shopify orders, Stripe transaction receipts, and Xero invoices. Due to discrepancies in refunds, multi-currency conversions, and tax calculations, simple copy-paste errors led to inaccurate reporting and missed refund leakages. 
+
+## The Solution
+
+We designed and implemented a custom multi-stage data orchestration pipeline using **n8n** and **Supabase**:
+1. **Extraction:** A web-hook listener polls real-time order events from Shopify and transaction settlements from Stripe.
+2. **Matching Engine:** Transactions are consolidated in a secure Supabase ledger, where currency rates are normalized and matched against corresponding Xero invoices.
+3. **Automated Ledgering:** Successful matches automatically reconcile in Xero with zero human intervention.
+4. **Exception Handling:** Unmatched charges are routed to a secure Slack-alerted exceptions queue panel, where teams can review and manually force-pair with a single click.
+
+## The ROI & Results
+
+Within the first 30 days of deployment:
+* **Time Saved:** Daily reconciliation dropped from 6 hours to under 15 minutes of overview checking.
+* **Recovered Revenue:** Detected and flagged $14,000 in duplicate refunds and miscalculated currency transactions that would have gone unnoticed.
+* **Accuracy:** Reached 100% bookkeeping audit readiness.

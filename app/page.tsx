@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { services } from "#site/content";
+import { services, portfolio } from "#site/content";
 
 import { SiteShell } from "@/components/layout/SiteShell";
 import { Section } from "@/components/layout/Section";
@@ -17,6 +17,8 @@ import { TestimonialTrio } from "@/components/sections/TestimonialTrio";
 import { FaqAccordion } from "@/components/sections/FaqAccordion";
 import { FinalCtaBand } from "@/components/sections/FinalCtaBand";
 import { LocationStrip } from "@/components/trust/LocationStrip";
+import { AutomationSandbox } from "@/components/sections/AutomationSandbox";
+import { DynamicGrain } from "@/components/utility/DynamicGrain";
 
 export const metadata: Metadata = {
   title: "Agentive Labs — Documented AI Automation for SMEs",
@@ -114,6 +116,7 @@ export default function Home() {
 
   return (
     <SiteShell>
+      <DynamicGrain />
       <Hero
         eyebrow="AI automation for SMEs · Lahore → Dubai · London · NYC · Toronto · Riyadh"
         title={
@@ -141,6 +144,13 @@ export default function Home() {
 
       <KpiStrip items={KPIS} eyebrow="What clients measure after we ship" />
 
+      {/* Playable sandbox simulator */}
+      <Section pad="lg">
+        <Container>
+          <AutomationSandbox />
+        </Container>
+      </Section>
+
       <Section pad="lg">
         <FeatureBento
           heading="What we build"
@@ -156,17 +166,35 @@ export default function Home() {
         />
       </Section>
 
+      {/* Dynamic Case Studies grid */}
       <Section pad="lg">
         <Container>
-          <CaseStudyCard
-            metric="−60%"
-            metricLabel="Reconciliation time, week 1 → week 12"
-            vertical="Shopify · D2C"
-            client="[Redacted — Shopify D2C, USD 4M ARR]"
-            summary="[Placeholder] We rebuilt the daily order-to-invoice reconciliation flow on n8n with Shopify, Stripe and Xero, replacing a 6-hour-per-day spreadsheet routine. Owner reclaimed 30 hours a week; finance lead caught $14K of mispriced refunds in the first month."
-            href="/contact?package=ai-lead-gen-kit"
-            ctaLabel="See the Shopify Recon Demo →"
-          />
+          <div className="max-w-2xl mb-10">
+            <div className="font-mono text-[11px] uppercase tracking-[0.08em] text-fg-subtle">
+              Case Studies
+            </div>
+            <h2 className="mt-3 font-serif text-3xl tracking-tight md:text-4xl">
+              Audited Operational Reclaims
+            </h2>
+            <p className="mt-3 text-base leading-relaxed text-fg-muted">
+              Real results. Documented infrastructure stacks. Click to read the full system design post-mortems.
+            </p>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2">
+            {portfolio.slice(0, 2).map((p) => (
+              <CaseStudyCard
+                key={p.slug}
+                metric={p.results.value}
+                metricLabel={p.results.label}
+                vertical={p.industry}
+                client={p.client}
+                summary={p.summary}
+                href={`/portfolio/${p.slug}`}
+                ctaLabel="See Case Study & Stack →"
+              />
+            ))}
+          </div>
         </Container>
       </Section>
 

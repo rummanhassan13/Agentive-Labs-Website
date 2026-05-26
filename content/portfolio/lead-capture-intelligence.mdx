@@ -1,0 +1,45 @@
+---
+slug: lead-capture-intelligence
+title: Multi-Channel Lead Capture & Intelligent Scoring
+client: "ScaleScale Digital Agency"
+industry: Professional Services
+summary: We overhauled a marketing agency's fragmented lead-capture flow into a unified, high-performing lead intelligence engine on HubSpot. It achieved a 90% SLA compliance rate and boosted sales call conversions by 22%.
+results:
+  value: "+22%"
+  label: Conversion Increase
+servicesRelated:
+  - ai-lead-gen-kit
+  - ai-sales-chatbot-lead-qualifier
+deliverables:
+  - Multi-channel form listener webhook
+  - Clearbit-equivalent automated company research lookup
+  - Dynamic sales rep routing algorithm
+  - Real-time Slack notifications engine
+techStack:
+  - n8n
+  - HubSpot API
+  - Slack API
+  - Firecrawl API
+  - OpenAI API
+timelineDays: "14"
+featured: false
+order: 3
+---
+
+## The Challenge
+
+ScaleScale Digital, a B2B marketing agency, was losing hot leads due to a slow, disjointed qualification process. Inbound inquiries came through multiple landing pages, emails, and LinkedIn ads. Since qualification was done manually, reps often took 24–48 hours to research the prospect's company size, budget, and pain points before booking a call. By that time, prospects had already scheduled meetings with competitors.
+
+## The Solution
+
+We deployed a lightning-fast qualification and enrichment pipeline:
+1. **Unified Ingestion:** Custom n8n webhook nodes listen to form events across all landing pages and channels.
+2. **AI Enrichment:** The workflow instantly fetches the prospect's company website, utilizes **Firecrawl** to scrape their homepage, and prompts GPT-4o to extract company size, core services, and apparent technology stack.
+3. **Smart Lead Scoring:** Prospects are scored on ICP fit (fit vs. non-fit) based on custom rules.
+4. **Active Rep Routing & Alerts:** Premium leads are pushed directly to a dedicated Slack channel with a summary card and booking buttons. Sales reps are notified in under 90 seconds, and the CRM record in HubSpot is enriched automatically.
+
+## The ROI & Results
+
+* **Speed to Lead:** Response time fell from 24 hours to 3 minutes.
+* **Conversion Rate:** High-intent sales meetings booked from inbound forms increased by 22% due to rapid follow-ups.
+* **SLA Compliance:** Achieved 90%+ compliance with internal lead response agreements.

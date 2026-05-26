@@ -35,11 +35,12 @@ const footerLinks = {
   Product: [
     { label: "Services", href: "/services" },
     { label: "Pricing", href: "/pricing" },
-    { label: "Offers", href: "/offers" },
+    { label: "Portfolio", href: "/portfolio" },
     { label: "Contact", href: "/contact" },
   ],
   Company: [
     { label: "About", href: "/about" },
+    { label: "Blog", href: "/blog" },
     { label: "Security", href: "/security" },
   ],
   Legal: [
