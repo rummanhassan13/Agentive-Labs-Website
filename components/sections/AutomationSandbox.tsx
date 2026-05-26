@@ -9,10 +9,7 @@ import {
   Globe, 
   Database, 
   Sparkles, 
-  CheckCircle2, 
-  ArrowRight, 
-  Terminal, 
-  Layers 
+  Terminal
 } from "lucide-react";
 
 interface TriggerOption {

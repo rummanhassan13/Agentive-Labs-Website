@@ -5,6 +5,7 @@ import * as runtime from "react/jsx-runtime";
 
 interface MDXContentProps {
   code: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   components?: Record<string, React.ComponentType<any>>;
 }
 

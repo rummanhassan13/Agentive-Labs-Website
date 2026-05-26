@@ -48,7 +48,7 @@ export function MobileDrawer({ items }: { items: NavItem[] }) {
           ))}
         </nav>
         <div className="mt-8 flex items-center justify-between gap-3">
-          <BookSprintCta size="sm" label="Book the Discovery Sprint" />
+          <BookSprintCta className="w-full flex-1" label="Book the Discovery Sprint" />
           <ThemeToggle />
         </div>
       </SheetContent>

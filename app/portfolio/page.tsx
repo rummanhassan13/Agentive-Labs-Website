@@ -9,7 +9,7 @@ import { Hero } from "@/components/hero/Hero";
 import { CtaButton } from "@/components/cta/CtaButton";
 import { BookSprintCta } from "@/components/cta/BookSprintCta";
 import { FinalCtaBand } from "@/components/sections/FinalCtaBand";
-import { CheckCircle2, ChevronRight } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "AI Automation Case Studies — Agentive Labs Portfolio",

@@ -72,9 +72,13 @@ export function ContactForm({ onSubmitted, defaultWorkflow = "" }: ContactFormPr
     },
   });
 
+  // eslint-disable-next-line react-hooks/incompatible-library
   const workflowValue = watch("workflow") ?? "";
+  // eslint-disable-next-line react-hooks/incompatible-library
   const verticalValue = watch("vertical");
+  // eslint-disable-next-line react-hooks/incompatible-library
   const teamSizeValue = watch("teamSize");
+  // eslint-disable-next-line react-hooks/incompatible-library
   const budgetValue = watch("budget");
 
   React.useEffect(() => {
